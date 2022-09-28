@@ -14,54 +14,12 @@ export const env: Env = {
         biology: "b3c8f614-d24f-4ea4-82eb-381dcc83fa32",
         science: "aa6d8342-9ec3-45f4-8cdf-401e5973d0fa"
     },
-    max: {
-        username: "maxim.savenkov@bsm.org.es",
-        password: "max30011969",
+    you: {
+        username: "your.name@bsm.org.es",
+        password: "password",
         base: 8000,
         extra: 12000,
         percent: 100
-    },
-    felipe: {
-        username: "christianfelipe.alderetecarrion@bsm.org.es",
-        password: "MacBookAir",
-        base: 9000,
-        extra: 14000,
-        percent: 70
-    },
-    sonia: {
-        username: "sonia.afanaseva@bsm.org.es",
-        password: "12345678",
-        base: 20000,
-        extra: 30000,
-        percent: 80
-    },
-    alexey: {
-        username: "alexey.ivankov@bsm.org.es",
-        password: "Ai20121944",
-        base: 15000,
-        extra: 15000,
-        percent: 75
-    },
-    camil: {
-        username: "kamil.houari@bsm.org.es",
-        password: "bsm2020",
-        base: 8000,
-        extra: 12000,
-        percent: 90
-    },
-    jake: {
-        username: "jake.swinkels@bsm.org.es",
-        password: "1js157as",
-        base: 12000,
-        extra: 15000,
-        percent: 80
-    },
-    elijah: {
-        username: "elijah.tzanev@bsm.org.es",
-        password: "bism2020",
-        base: 12000,
-        extra: 13000,
-        percent: 80
     }
 };
 
@@ -89,11 +47,5 @@ export interface Env {
         biology: string
         science: string
     }
-    max: User
-    felipe: User
-    sonia: User
-    alexey: User
-    camil: User
-    jake: User
-    elijah: User
+    you: User
 }
