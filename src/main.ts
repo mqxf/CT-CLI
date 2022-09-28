@@ -11,7 +11,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const prompt = (query: any) => new Promise<string>((resolve) => rl.question(query, resolve));
 
 (async () => {
-    let user: User = env.you;
+    let user: User = env.max;
     await initToken(user.username, user.password);
     //await initTokenRefresh(env.refreshToken);
     userInit();
