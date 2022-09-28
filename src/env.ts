@@ -19,7 +19,7 @@ export const env: Env = {
         password: "max30011969",
         base: 8000,
         extra: 12000,
-        percent: 90
+        percent: 100
     },
     felipe: {
         username: "christianfelipe.alderetecarrion@bsm.org.es",
@@ -33,7 +33,7 @@ export const env: Env = {
         password: "12345678",
         base: 20000,
         extra: 30000,
-        percent: 60
+        percent: 80
     },
     alexey: {
         username: "alexey.ivankov@bsm.org.es",

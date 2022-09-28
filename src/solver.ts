@@ -119,6 +119,7 @@ export async function solveNugget(nugget: Nugget, baseTime: number, randomTime: 
         else {
             console.log(`UNKNOWN ANSWER TYPE: ${answer.answerType}! Halting! Please contact your administrator to fix this.`);
             console.log(answer.answerGroups[0].answers);
+            console.log(`Please go into the nugget '${nugget.nugget.name}' and do the question, then restart the bot!`);
             process.exit();
         }
         await submitAnswer(
@@ -135,9 +136,10 @@ export async function solveNugget(nugget: Nugget, baseTime: number, randomTime: 
         );
         console.log(`Answered question ${question + 1}/${assessment.items[0].questionGroups!.length}`);
         question++;
+        //await sleep(40000);
     }
     solving = false;
-    //await sleep(1000);
+    await sleep(2000);
     await closeNugget(nugget.activity.studySession.studySessionId);
     let res = await results(nugget.activity.studySession.studySessionId);
     console.log(`Finished nugget ${nugget.nugget.name} with a score of ${res.activity.overallResult.percentScore / 100}%!`);
@@ -167,7 +169,7 @@ async function pingLoop(nugget: Nugget, questionBase: number, questionRandom: nu
                 nugget.activity.studySession.strandId,
                 nugget.activity.studySession.courseId,
                 nugget.activity.studySession.studySessionId,
-                (Math.random() * contentRandom) + contentBase
+                (Math.random() * questionRandom) + questionBase
             );
         }
         else {

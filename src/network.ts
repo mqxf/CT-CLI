@@ -253,6 +253,57 @@ export async function refreshToken(refreshToken: string) {
     return await res.json() as TokenResponse;
 }
 
+export interface SubjectsResponse {
+    data: {
+        userSubjects: {
+            subjects: {
+                labelId: string
+                name: string
+                parentId: string
+                __typename: string
+            }[],
+            subjectGroups: {
+                labelId: string
+                name: string
+                __typename: string
+            }[],
+            __typename: string
+        }
+    }
+}
+
+export async function subjects(userId: string) {
+    let res = await fetch("https://api.century.tech/roentgen/graphql", {
+        "headers": {
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:104.0) Gecko/20100101 Firefox/104.0",
+            "Accept": "*/*",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Content-Type": "application/json",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-site",
+            "authorization": `Bearer ${token}`
+        },
+        "referrer": "https://app.century.tech/",
+        "body": JSON.stringify({
+            "operationName": "userSubjects",
+            "variables": {
+                "input": {
+                    "userId": userId,
+                    "courseTypes": [
+                        "standard"
+                    ]
+                }
+            },
+            "query": "query userSubjects($input: UserSubjectsInput!) {\n  userSubjects(input: $input) {\n    subjects {\n      labelId\n      name\n      parentId\n      __typename\n    }\n    subjectGroups {\n      labelId\n      name\n      __typename\n    }\n    __typename\n  }\n}\n"
+        }),
+        "method": "POST",
+    });
+
+
+    return await res.json() as SubjectsResponse;
+}
+
 export interface NuggetLoadResponse {
     data: {
         nuggetPath: {
@@ -596,4 +647,38 @@ export async function results(studySessionId: string) {
     });
 
     return await res.json() as NuggetResults;
+}
+
+export interface DisplayNuggetResult {
+    id: string
+    course: string
+    courseId: string
+    courseLevel: string
+    name: string
+    iconCode: string
+    bestResult: number
+    lastResult: number
+    strand: string
+    subject: string
+    studyGroup: string
+    isDiagnosticAssessment: boolean
+}
+
+export async function getNuggets(subjectId: string) {
+    let res = await fetch(`https://api.century.tech/learnapi/nuggets?includeIds=${subjectId}&limit=1000&mode=linear`, {
+        "headers": {
+            "User-Agent": env.userAgent,
+            "Accept": "application/json",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-site",
+            "authorization": `Bearer ${token}`,
+            "If-None-Match": "W/\"df16-zEjnHXsHmJkyBkHbKc0g5wdJsKk\""
+        },
+        "referrer": "https://app.century.tech/",
+        "method": "GET",
+    });
+
+    return await res.json() as DisplayNuggetResult[];
 }
