@@ -11,7 +11,7 @@ const rl = readline.createInterface({ input: process.stdin, output: process.stdo
 const prompt = (query: any) => new Promise<string>((resolve) => rl.question(query, resolve));
 
 (async () => {
-    let user: User = env.max;
+    let user: User = env.you;
     await initToken(user.username, user.password);
     //await initTokenRefresh(env.refreshToken);
     userInit();
@@ -54,7 +54,7 @@ const prompt = (query: any) => new Promise<string>((resolve) => rl.question(quer
 
         let filter = await prompt("Filter nugget name? (Type the keyword(s) to look for or type 'none' for no filter): ");
 
-        let rawdata = fs.readFileSync(`/home/max/Desktop/Coding/Node/Century\ Tech\ Solver\ CLI/nuggets/${subject}.json`);
+        let rawdata = fs.readFileSync(`/home/you/Desktop/CT/nuggets/${subject}.json`);
         let nuggets = JSON.parse(rawdata.toString()) as CourseNugget[];
 
         for (let nugget of nuggets) {
